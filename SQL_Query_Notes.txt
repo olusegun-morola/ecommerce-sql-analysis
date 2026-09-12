@@ -1,0 +1,63 @@
+Summary of My SQL Queries and Screenshots
+
+I first created my database called `e_commerce` and then created the following tables:
+
+1. `customer`
+2. `orders`
+3. `order_items`
+4. `products`
+5. `reviews`
+
+ First Screenshot
+
+```sql
+SELECT * FROM products WHERE unit_price >= 20 LIMIT 10;
+```
+
+I used this SQL query to select products with a **unit price of 20 or more**. I used `LIMIT 10` to display only 10 records from the results.
+
+Second Screenshot
+
+```sql
+SELECT COUNT(DISTINCT product_name) FROM products;
+```
+
+I used `COUNT(DISTINCT product_name)` to count the **unique product names** in the `products` table. Using `DISTINCT` means that duplicate product names are not counted more than once.
+
+Third Screenshot
+
+```sql
+SELECT product_name, SUM(unit_price) AS total_price
+FROM products
+GROUP BY product_name
+HAVING SUM(unit_price) >= 20
+ORDER BY SUM(unit_price) DESC
+LIMIT 10;
+```
+
+I used `SUM(unit_price)` to calculate the total unit price for each product name and renamed the result as `total_price`. I then grouped the results by `product_name` using `GROUP BY`.
+
+I used `HAVING` to show only product groups where the total unit price was **20 or more**. Finally, I used `ORDER BY` to sort the results from the highest total price to the lowest and `LIMIT 10` to display the top 10 results.
+
+Fourth Screenshot
+
+```sql
+SELECT MAX(unit_price) AS highest_price
+FROM products;
+```
+
+I used the `MAX()` function to find the **highest unit price** in the `products` table and renamed the result as `highest_price`.
+
+Fifth Screenshot
+
+```sql
+SELECT products.product_id, product_name, category, reviews.rating, review_text
+FROM products
+INNER JOIN reviews
+ON products.product_id = reviews.product_id
+ORDER BY product_name DESC;
+```
+
+I used an `INNER JOIN` to combine the `products` table with the `reviews` table using `product_id` as the matching column.
+
+The query returns the product ID, product name, category, review rating, and review text. I then used `ORDER BY product_name DESC` to sort the product names in **descending alphabetical order (Z to A)**.
